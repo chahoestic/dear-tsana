@@ -3,277 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Tsana ✨</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <title>For Tsana</title>
     <style>
         :root {
-            --bg-gradient: linear-gradient(135deg, #E8F5E9 0%, #FFF9C4 100%);
-            --main-green: #2E7D32;
-            --dark-green: #1B5E20;
-            --accent-yellow: #FDD835;
-            --glow-yellow: #FFEE58;
-            --text-dark: #222222;
+            --bg-color: #F8F9FA;
+            --card-bg: #FFFFFF;
+            --text-main: #2B2D42;
+            --text-muted: #6C757D;
+            --pastel-green: #E2ECE9;
+            --accent-green: #3B7A57;
+            --pastel-yellow: #FFF3CD;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background: var(--bg-gradient);
-            color: var(--text-dark);
+            background-color: var(--bg-color);
+            color: var(--text-main);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
-            overflow: hidden;
-            position: relative;
+            padding: 24px;
         }
 
-        /* Background Floating Elements Animation */
-        .bg-decor {
-            position: absolute;
-            font-size: 25px;
-            opacity: 0.2;
-            animation: floatAround 8s infinite linear;
-            z-index: 1;
-        }
-
-        @keyframes floatAround {
-            0% { transform: translateY(100vh) rotate(0deg) translateX(0); opacity: 0; }
-            50% { opacity: 0.4; }
-            100% { transform: translateY(-10vh) rotate(360deg) translateX(50px); opacity: 0; }
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            max-width: 550px;
+        .wrapper {
+            max-width: 480px;
             width: 100%;
-            border-radius: 30px;
-            box-shadow: 0 20px 50px rgba(46, 125, 50, 0.15);
+            background: var(--card-bg);
+            border-radius: 20px;
             padding: 40px 30px;
-            text-align: center;
-            border: 3px solid var(--accent-yellow);
-            z-index: 10;
-            position: relative;
-            transform: translateY(0);
-            transition: all 0.5s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid #EAEAEA;
         }
 
-        /* Advanced Page Transitions */
         .step {
             display: none;
             opacity: 0;
-            transform: scale(0.9) translateY(30px);
-            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
 
         .step.active {
             display: block;
             opacity: 1;
-            transform: scale(1) translateY(0);
+            transform: translateY(0);
+        }
+
+        /* Foto Styling */
+        .photo-frame {
+            width: 100%;
+            height: 250px;
+            background-color: #EEE;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            overflow: hidden;
+            border: 1px solid #E5E5E5;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         h1 {
-            color: var(--main-green);
-            margin-bottom: 20px;
-            font-size: 2.2rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 24px;
+            color: var(--text-main);
         }
 
         p {
-            line-height: 1.8;
-            margin-bottom: 25px;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-main);
             white-space: pre-line;
-            background: rgba(255, 255, 255, 0.6);
-            padding: 15px;
-            border-radius: 15px;
-            box-shadow: inset 0 2px 8px rgba(0,0,0,0.02);
+            text-align: left;
+            margin-bottom: 30px;
         }
 
-        /* Modern Glowing Button Styling */
+        .highlight-box {
+            background-color: var(--pastel-green);
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1rem;
+            border-left: 4px solid var(--accent-green);
+        }
+
+        .yellow-box {
+            background-color: var(--pastel-yellow);
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1rem;
+            border: 1px dashed #FFC107;
+        }
+
+        .btn-container {
+            text-align: right;
+        }
+
         button {
-            background: linear-gradient(135deg, var(--main-green) 0%, var(--dark-green) 100%);
-            color: white;
+            background-color: var(--text-main);
+            color: #FFFFFF;
             border: none;
-            padding: 14px 35px;
-            font-size: 1.05rem;
-            font-weight: bold;
-            border-radius: 30px;
+            padding: 12px 28px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(46, 125, 50, 0.3);
-            margin-top: 10px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            transition: background-color 0.2s ease, transform 0.1s ease;
         }
 
         button:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 12px 25px rgba(46, 125, 50, 0.4);
-            background: linear-gradient(135deg, var(--dark-green) 0%, #0d3c0f) 100%;
+            background-color: #1F202E;
         }
 
         button:active {
-            transform: translateY(-1px);
+            transform: scale(0.98);
         }
 
-        /* Ultra Gift Box Animation */
-        .gift-box-container {
-            margin: 30px 0;
-            perspective: 1000px;
-        }
-
-        .gift-box {
-            font-size: 90px;
+        .gift-trigger {
+            width: 100px;
+            height: 100px;
+            background: var(--pastel-green);
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            margin: 20px 0;
             cursor: pointer;
-            display: inline-block;
-            transition: all 0.3s ease;
-            animation: waveShake 2.5s infinite ease-in-out;
+            transition: transform 0.2s;
         }
 
-        .gift-box:hover {
-            transform: scale(1.2) rotate(5deg);
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.15));
-        }
-
-        @keyframes waveShake {
-            0%, 100% { transform: rotate(0deg) scale(1); }
-            20% { transform: rotate(-8deg) scale(1.05); }
-            40% { transform: rotate(6deg) scale(1.05); }
-            60% { transform: rotate(-4deg) scale(1.05); }
-            80% { transform: rotate(2deg) scale(1.05); }
-        }
-
-        .highlight-alert {
-            border-left: 5px solid #FFB300;
-            background: #FFFDE7 !important;
+        .gift-trigger:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-decor" style="left: 10%; animation-delay: 0s;">🍃</div>
-    <div class="bg-decor" style="left: 30%; animation-delay: 2s;">✨</div>
-    <div class="bg-decor" style="left: 50%; animation-delay: 4s;">🟢</div>
-    <div class="bg-decor" style="left: 70%; animation-delay: 1s;">🟡</div>
-    <div class="bg-decor" style="left: 90%; animation-delay: 5s;">🌱</div>
-
-    <div class="container">
+    <div class="wrapper">
         
         <div class="step active" id="step-1">
-            <h1>Helloooooo Tsana! 🟢🟡</h1>
-            <div class="gift-box-container">
-                <div class="gift-box" id="box-icon" onclick="bukaHadiah()">🎁</div>
+            <h1 style="text-align: center;">Halo Tsana.</h1>
+            <div style="text-align: center;">
+                <div class="gift-trigger" id="gift-box" onclick="bukaHadiah()">🎁</div>
             </div>
-            <p id="gift-text" style="text-align: center; font-weight: bold; color: #555;">Klik kadonya dong...</p>
-            <div id="next-btn-1" style="display: none; animation: popIn 0.5s ease forwards;">
-                <button onclick="changeStep(2)">Lanjut Baca Klik Sini ✨</button>
+            <p id="gift-intro" style="text-align: center; color: var(--text-muted);">Klik kado di atas untuk membuka pesan.</p>
+            
+            <div id="next-container-1" style="display: none;" class="btn-container">
+                <button onclick="changeStep(2)">Lanjut</button>
             </div>
         </div>
 
         <div class="step" id="step-2">
-            <p class="highlight-alert">gw sengaja beliin selimut ini karena gw harap deep sleep lu bisa bener anjir, serem juga ya umur segini tapi deep sleep selalu &lt;30 menit gara gara kencing mulu tiap malem (menurut gw lu mesti cek gula darah rutin)</p>
-            <button onclick="changeStep(3)">Lanjut Ganteng 👉</button>
+            <div class="photo-frame">
+                <img src="foto1.jpeg" alt="Memory 1" onerror="this.style.display='none'; this.parentNode.innerText='[ Masukkan foto1.jpeg di sini ]'; this.parentNode.style.display='flex'; this.parentNode.style.alignItems='center'; this.parentNode.style.justifyContent='center'; this.parentNode.style.color='#888';">
+            </div>
+            <p class="highlight-box">gw sengaja beliin selimut ini karena gw harap deep sleep lu bisa bener anjir, serem juga ya umur segini tapi deep sleep selalu &lt;30 menit gara gara kencing mulu tiap malem (menurut gw lu mesti cek gula darah rutin)</p>
+            <div class="btn-container">
+                <button onclick="changeStep(3)">Lanjut</button>
+            </div>
         </div>
 
         <div class="step" id="step-3">
+            <div class="photo-frame">
+                <img src="foto2.jpeg" alt="Memory 2" onerror="this.style.display='none'; this.parentNode.innerText='[ Masukkan foto2.jpeg di sini ]'; this.parentNode.style.display='flex'; this.parentNode.style.alignItems='center'; this.parentNode.style.justifyContent='center'; this.parentNode.style.color='#888';">
+            </div>
             <p>thank you for being such a supportive friend sekaligus temen yg bisa ngejokes + ngobrolin LITERALLY ANYTHING. at first i thought lu adalah orang pendiem yang susah buat diajak ngejokes. TAPI TERNYATA BERKEBALIKAN BGT ANYING WKWKWK SEGALA JOMOK AJA BISA RELATE???</p>
-            <button onclick="changeStep(4)">Ter-Relate Selanjutnya 👉</button>
+            <div class="btn-container">
+                <button onclick="changeStep(4)">Lanjut</button>
+            </div>
         </div>
 
         <div class="step" id="step-4">
+            <div class="photo-frame">
+                <img src="foto3.jpeg" alt="Memory 3" onerror="this.style.display='none'; this.parentNode.innerText='[ Masukkan foto3.jpeg di sini ]'; this.parentNode.style.display='flex'; this.parentNode.style.alignItems='center'; this.parentNode.style.justifyContent='center'; this.parentNode.style.color='#888';">
+            </div>
             <p>9 months kerja bareng lu ga kerasa bgt sih karena seru bgt kita ada aja obrolannya dan gw tuh bisa dengan nyaman ngomongin apapun itu ke lu. emang lu lah si kalcer pecinta anggrek mekar pontianak favorit kesukaan gweh yang ytta aja.</p>
-            <button onclick="changeStep(5)">Masa Depan Lu 🔮</button>
+            <div class="btn-container">
+                <button onclick="changeStep(5)">Lanjut</button>
+            </div>
         </div>
 
         <div class="step" id="step-5">
             <p>semoga sesudah ini bisa dapet tempat yang lebih baik yaa tsan. i’m really sure, dengan kemampuan lu yang sekarang lu bisa juga dapetin kerjaan dengan compensation & benefit yang ofc lebih sesuai sama yang lu mau. entah lu tbtb keterima kerja di rawalumbu, jadi instruktur pilates di kampung bulak kapal, atau ternyata keterima MT supya bisa mengabdi di ngawi???</p>
-            <button onclick="changeStep(6)">We Never Know... 🧭</button>
+            <div class="btn-container">
+                <button onclick="changeStep(6)">Lanjut</button>
+            </div>
         </div>
 
         <div class="step" id="step-6">
-            <p style="font-size: 1.2rem; border: 2px dashed var(--main-green); background: #E8F5E9;">we never know loh rekkk yang paling penting inget kata mas rusdi: slow aja kelesss (pls tell me you got the reference😭)</p>
-            <button onclick="triggerFinalStep()">Pesan Terakhir ✉️</button>
+            <p class="yellow-box">we never know loh rekkk yang paling penting inget kata mas rusdi: slow aja kelesss (pls tell me you got the reference😭)</p>
+            <div class="btn-container">
+                <button onclick="changeStep(7)">Lanjut</button>
+            </div>
         </div>
 
         <div class="step" id="step-7">
-            <p style="font-size: 1.4rem; font-weight: bold; color: var(--dark-green); border: none; background: transparent; box-shadow: none;">byeee byeee tsanaaa pls ayooo tetep mainn!!!</p>
-            <div style="font-size: 60px; margin: 25px 0; animation: waveShake 2s infinite;">🛌💚✨💛</div>
-            <button onclick="changeStep(1)" style="background: #555;">Ulangi Dari Awal 🔄</button>
+            <h1 style="font-size: 1.4rem; line-height: 1.6; font-weight: 600; margin-bottom: 30px;">byeee byeee tsanaaa pls ayooo tetep mainn!!!</h1>
+            <div class="btn-container" style="text-align: center;">
+                <button onclick="changeStep(1)" style="background-color: var(--text-muted);">Ulangi Dari Awal</button>
+            </div>
         </div>
 
     </div>
 
     <script>
-        // Efek Ledakan Petasan Kertas (Confetti)
-        function popConfetti() {
-            confetti({
-                particleCount: 150,
-                spread: 80,
-                origin: { y: 0.6 },
-                colors: ['#2E7D32', '#FDD835', '#FFF9C4', '#4CAF50']
-            });
-        }
-
         function bukaHadiah() {
-            const box = document.getElementById('box-icon');
-            const text = document.getElementById('gift-text');
-            const btn = document.getElementById('next-btn-1');
+            const giftBox = document.getElementById('gift-box');
+            const introText = document.getElementById('gift-intro');
+            const btnContainer = document.getElementById('next-container-1');
+
+            giftBox.innerHTML = "🛌";
+            introText.innerHTML = "kalo lu buka hadiahnya, lu akan menemukan barang yang selama ini dapat membantu masalah hidup terbesar lu. yap betul, selimut supaya deep sleep lu bisa lebih tinggi.";
+            introText.style.textAlign = "left";
+            introText.style.color = "var(--text-main)";
             
-            // Trigger efek ledakan
-            popConfetti();
-            
-            box.innerHTML = "🛌✨";
-            box.style.animation = "none";
-            box.style.transform = "scale(1.3)";
-            
-            text.innerHTML = "kalo lu buka hadiahnya, lu akan menemukan barang yang selama ini dapat membantu masalah hidup terbesar lu. yap betul, selimut supaya deep sleep lu bisa lebih tinggi.";
-            text.style.textAlign = "left";
-            
-            btn.style.display = "block";
+            btnContainer.style.display = "block";
         }
 
         function changeStep(stepNum) {
             const steps = document.querySelectorAll('.step');
-            
-            // Hilangkan class active dari step yang sekarang
-            steps.forEach(s => {
-                s.classList.remove('active');
-            });
-            
-            // Tampilkan step berikutnya dengan jeda mikro agar animasinya ke-trigger halus
+            steps.forEach(s => s.classList.remove('active'));
+
             setTimeout(() => {
-                const nextStep = document.getElementById('step-' + stepNum);
-                nextStep.classList.add('active');
+                document.getElementById('step-' + stepNum).classList.add('active');
             }, 50);
 
-            // Reset total jika balik ke langkah 1
             if (stepNum === 1) {
-                const box = document.getElementById('box-icon');
-                const text = document.getElementById('gift-text');
-                const btn = document.getElementById('next-btn-1');
-                box.innerHTML = "🎁";
-                box.style.animation = "waveShake 2.5s infinite ease-in-out";
-                box.style.transform = "none";
-                text.innerHTML = "Klik kadonya dong...";
-                text.style.textAlign = "center";
-                btn.style.display = "none";
+                const giftBox = document.getElementById('gift-box');
+                const introText = document.getElementById('gift-intro');
+                const btnContainer = document.getElementById('next-container-1');
+                
+                giftBox.innerHTML = "🎁";
+                introText.innerHTML = "Klik kado di atas untuk membuka pesan.";
+                introText.style.textAlign = "center";
+                introText.style.color = "var(--text-muted)";
+                btnContainer.style.display = "none";
             }
-        }
-
-        function triggerFinalStep() {
-            changeStep(7);
-            // Kasih efek selebrasi di halaman akhir biar makin berkesan
-            setTimeout(popConfetti, 400);
-            setTimeout(popConfetti, 800);
         }
     </script>
 </body>
