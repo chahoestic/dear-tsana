@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Message for Tsana ✨</title>
+    <style>
+        :root {
+            --bg-green: #E8F5E9;
+            --main-green: #2E7D32;
+            --dark-green: #1B5E20;
+            --accent-yellow: #FDD835;
+            --light-yellow: #FFF9C4;
+            --text-dark: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-green);
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: white;
+            max-width: 550px;
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            border: 4px solid var(--accent-yellow);
+        }
+
+        .step {
+            display: none;
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: var(--main-green);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .highlight {
+            background-color: var(--light-yellow);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: var(--dark-green);
+        }
+
+        /* Button Styling */
+        button {
+            background-color: var(--main-green);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: var(--dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(46, 125, 50, 0.4);
+        }
+
+        /* Gift Box Animation Area */
+        .gift-container {
+            margin: 30px 0;
+            cursor: pointer;
+        }
+
+        .gift-icon {
+            font-size: 80px;
+            animation: bounce 2s infinite;
+            display: inline-block;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
+        }
+
+        /* Health Alert Box */
+        .alert-box {
+            background-color: #FFEBEE;
+            border-left: 5px solid #D32F2F;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        /* Future Career Cards */
+        .cards-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background: var(--bg-green);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #C8E6C9;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        /* Floating Meme / Secret Alert */
+        .rusdi-popup {
+            display: none;
+            background: var(--accent-yellow);
+            color: #000;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 15px;
+            border: 2px dashed var(--dark-green);
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.03); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="step active" id="step-1">
+            <h1>Halo Tsana! 🟢🟡</h1>
+            <p>Hari ini hari terakhir gw di sini. Sebelum gw beneran pamit, gw punya sesuatu yang spesial khusus buat lu. Coba klik tombol di bawah!</p>
+            <button onclick="nextStep(2)">Mulai Klik Di Sini</button>
+        </div>
+
+        <div class="step" id="step-2">
+            <h1>Unboxing Hadiah... 🎁</h1>
+            <p>Kalo lu buka hadiah dari gw, lu akan menemukan barang yang selama ini dapat membantu masalah hidup terbesar lu...</p>
+            <div class="gift-container" onclick="openGift()">
+                <div class="gift-icon" id="giftBox">🎁</div>
+            </div>
+            <p style="font-size: 0.9rem; color: #666;">(Klik kado di atas buat ngebuka)</p>
+            
+            <div id="giftReveal" style="display: none;">
+                <p>Yap betul! <span class="highlight">Selimut</span> supaya deep sleep lu bisa lebih tinggi! 🛌✨</p>
+                <p>Gw sengaja beliin selimut ini karena gw harap deep sleep lu bisa bener anjir. Serem juga ya umur segini tapi deep sleep selalu <strong>&lt;30 menit</strong> gara-gara kencing mulu tiap malem... 🤔</p>
+                
+                <div class="alert-box">
+                    <strong>⚠️ Notifikasi Kesehatan:</strong><br>
+                    Menurut gw lu mesti cek gula darah rutin, Tsan! Jangan disepelein wkwkwk.
+                </div>
+                <button onclick="nextStep(3)">Lanjut, Ada Lagi 👇</button>
+            </div>
+        </div>
+
+        <div class="step" id="step-3">
+            <h1>Thank You, Tsan! 🫶</h1>
+            <p>Makasih banyak ya udah jadi <span class="highlight">supportive friend</span> sekaligus temen yang bisa ngejokes + ngobrolin <strong>LITERALLY ANYTHING.</strong></p>
+            <p>At first i thought lu adalah orang pendiem yang susah buat diajak ngejokes. <em>TAPI TERNYATA BERKEBALIKAN BGT ANYING WKWKWK SEGALA JOMOK AJA BISA RELATE???</em> 😭😂</p>
+            <p><strong>9 months</strong> kerja bareng lu ga kerasa bgt sih karena seru bgt kita ada aja obrolannya dan gw tuh bisa dengan nyaman ngomongin apapun itu ke lu.</p>
+            <p>Emang lu lah si <span class="highlight">kalcer pecinta anggrek mekar pontianak</span> favorit kesukaan gweh yang ytta aja deh! 🌸</p>
+            <button onclick="nextStep(4)">Masa Depan Tsana 🔮</button>
+        </div>
+
+        <div class="step" id="step-4">
+            <h1>Semoga Sukses Sesudah Ini! 🚀</h1>
+            <p>Semoga sesudah ini bisa dapet tempat yang lebih baik yaa tsan. I’m really sure, dengan kemampuan lu yang sekarang lu bisa juga dapetin kerjaan dengan <em>compensation & benefit</em> yang ofc lebih sesuai sama yang lu mau.</p>
+            <p>Kita gak pernah tau kedepannya lu bakalan ditempatin di mana, siapa tahu tiba-tiba lu...</p>
+            
+            <div class="cards-container">
+                <div class="card">📍 Keterima kerja di Rawalumbu</div>
+                <div class="card">🧘‍♀️ Jadi instruktur pilates di Kampung Bulak Kapal</div>
+                <div class="card">🦅 Atau ternyata keterima MT supaya bisa mengabdi di Ngawi???</div>
+            </div>
+
+            <p>We never know loh rekkk! Yang paling penting, inget kata bijak dari salah satu idola kita...</p>
+            
+            <button onclick="toggleRusdi()">Inget Kata Mas Rusdi?</button>
+            <div class="rusdi-popup" id="rusdiText">
+                "Slow aja kelesss 😎👊"
+            </div>
+            
+            <div style="margin-top: 25px;">
+                <button style="background-color: var(--accent-yellow); color: black;" onclick="nextStep(5)">Terakhir Dari Gw 👋</button>
+            </div>
+        </div>
+
+        <div class="step" id="step-5">
+            <h1>Byeee Byeee Tsanaaa! 👋✨</h1>
+            <p style="font-size: 1.3rem; font-weight: bold; color: var(--dark-green); margin-top: 20px;">
+                Pls ayooo tetep mainn!!! Jangan lost contact yaaa!
+            </p>
+            <p>Semoga tidur lu makin nyenyak pake selimut baru! 😴💚</p>
+            <div style="font-size: 50px; margin: 20px 0;">💚🛌💛</div>
+            <button onclick="nextStep(1)">Baca Dari Ulang</button>
+        </div>
+
+    </div>
+
+    <script>
+        function nextStep(stepNumber) {
+            // Sembunyikan semua step
+            const steps = document.querySelectorAll('.step');
+            steps.forEach(step => step.classList.remove('active'));
+            
+            // Tampilkan step yang dituju
+            const currentStep = document.getElementById('step-' + stepNumber);
+            currentStep.classList.add('active');
+
+            // Reset tampilan kado kalau balik ke depan
+            if(stepNumber === 1) {
+                document.getElementById('giftBox').innerHTML = "🎁";
+                document.getElementById('giftReveal').style.display = "none";
+                document.getElementById('rusdiText').style.display = "none";
+            }
+        }
+
+        function openGift() {
+            const giftBox = document.getElementById('giftBox');
+            const giftReveal = document.getElementById('giftReveal');
+            
+            giftBox.innerHTML = "🔓🛌✨";
+            giftBox.style.animation = "none"; // stop bounce animation
+            
+            // Tampilkan efek reveal text
+            giftReveal.style.display = "block";
+            giftReveal.style.animation = "fadeIn 0.8s ease forwards";
+        }
+
+        function toggleRusdi() {
+            const rusdiText = document.getElementById('rusdiText');
+            if(rusdiText.style.display === "block") {
+                rusdiText.style.display = "none";
+            } else {
+                rusdiText.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
