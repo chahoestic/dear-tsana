@@ -1,205 +1,464 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Tsana ✨</title>
-    <style>
-        :root {
-            --bg-color: #E8F5E9;
-            --main-green: #2E7D32;
-            --accent-yellow: #FDD835;
-            --text-dark: #222222;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Tsana ✨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Patrick+Hand&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EAF5E9;
+    --paper:#FFFDF7;
+    --green:#2E7D32;
+    --green-dark:#1B5E20;
+    --yellow:#FDD835;
+    --ink:#2b2b2b;
+    --tape:rgba(253,216,53,0.55);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{overflow-x:hidden}
+  body{
+    font-family:'Patrick Hand', cursive;
+    background:
+      radial-gradient(circle at 20% 10%, #d6ebd3 0, transparent 40%),
+      radial-gradient(circle at 80% 60%, #f4f0c8 0, transparent 45%),
+      var(--bg);
+    color:var(--ink);
+    min-height:100vh;
+    line-height:1.55;
+  }
+  /* floating leaves */
+  .leaf{
+    position:fixed;
+    top:-40px;
+    font-size:22px;
+    opacity:.55;
+    pointer-events:none;
+    animation:fall linear infinite;
+    z-index:0;
+  }
+  @keyframes fall{
+    0%{transform:translateY(-10vh) rotate(0)}
+    100%{transform:translateY(110vh) rotate(540deg)}
+  }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+  /* ============ UNBOXING INTRO ============ */
+  #intro{
+    position:fixed;inset:0;
+    background:linear-gradient(160deg,#EAF5E9 0%, #d4ecd2 100%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    z-index:50;
+    transition:opacity .8s ease, visibility .8s ease;
+    padding:20px;
+  }
+  #intro.gone{opacity:0;visibility:hidden}
+  #intro h1{
+    font-family:'Caveat',cursive;
+    color:var(--green-dark);
+    font-size:clamp(32px,6vw,48px);
+    margin-bottom:8px;
+  }
+  #intro .sub{font-size:18px;color:#555;margin-bottom:30px}
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
+  .box-wrap{
+    position:relative;
+    width:220px;height:200px;
+    cursor:pointer;
+    perspective:800px;
+  }
+  .box-base{
+    position:absolute;bottom:0;left:0;right:0;
+    height:140px;
+    background:linear-gradient(180deg,#388E3C,#2E7D32);
+    border-radius:8px;
+    box-shadow:0 18px 35px rgba(0,0,0,.18), inset 0 -8px 0 rgba(0,0,0,.15);
+  }
+  /* yellow ribbon vertical */
+  .box-base::before{
+    content:"";position:absolute;top:0;bottom:0;left:50%;width:26px;
+    transform:translateX(-50%);
+    background:var(--yellow);
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.05);
+  }
+  .box-lid{
+    position:absolute;top:50px;left:-8px;right:-8px;
+    height:50px;
+    background:linear-gradient(180deg,#43A047,#2E7D32);
+    border-radius:8px;
+    box-shadow:0 6px 12px rgba(0,0,0,.2);
+    transform-origin:center bottom;
+    transition:transform 1s cubic-bezier(.5,-0.3,.3,1.4), top 1s ease, opacity .6s ease .8s;
+    z-index:3;
+  }
+  .box-lid::before{
+    content:"";position:absolute;top:0;bottom:0;left:50%;width:26px;
+    transform:translateX(-50%);background:var(--yellow);
+  }
+  /* bow */
+  .bow{
+    position:absolute;top:38px;left:50%;transform:translateX(-50%);
+    font-size:40px;z-index:4;
+    transition:transform .8s ease, opacity .6s ease;
+  }
+  .blanket{
+    position:absolute;top:60px;left:50%;
+    transform:translateX(-50%) scale(0);
+    font-size:80px;
+    opacity:0;
+    transition:transform 1s cubic-bezier(.2,1.3,.5,1) .5s, opacity .8s ease .5s, top 1s ease .5s;
+    z-index:2;
+  }
+  .box-wrap.open .box-lid{transform:translateY(-100px) rotate(-25deg);opacity:0}
+  .box-wrap.open .bow{transform:translate(-50%,-150px) rotate(45deg);opacity:0}
+  .box-wrap.open .blanket{transform:translateX(-50%) scale(1);opacity:1;top:-30px}
 
-        .container {
-            background: white;
-            max-width: 550px;
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            padding: 30px;
-            text-align: center;
-            border: 4px solid var(--accent-yellow);
-        }
+  .tap-hint{
+    margin-top:30px;color:var(--green-dark);
+    font-family:'Caveat',cursive;font-size:24px;
+    animation:pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse{50%{opacity:.4}}
 
-        .step {
-            display: none;
-            animation: fadeIn 0.5s ease forwards;
-        }
+  #reveal-msg{
+    margin-top:24px;
+    background:var(--paper);
+    padding:18px 24px;
+    border-radius:14px;
+    max-width:420px;
+    font-size:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    border:2px dashed var(--green);
+    opacity:0;transform:translateY(20px);
+    transition:opacity .8s ease 1.2s, transform .8s ease 1.2s;
+    text-align:center;
+  }
+  .box-wrap.open ~ #reveal-msg{opacity:1;transform:translateY(0)}
+  #scroll-btn{
+    margin-top:18px;
+    background:var(--green);color:white;border:none;
+    padding:12px 28px;border-radius:30px;font-size:18px;
+    font-family:'Patrick Hand',cursive;cursor:pointer;
+    box-shadow:0 6px 16px rgba(46,125,50,.35);
+    opacity:0;pointer-events:none;
+    transition:opacity .6s ease 2s, transform .2s;
+  }
+  .box-wrap.open ~ #scroll-btn{opacity:1;pointer-events:auto}
+  #scroll-btn:hover{transform:translateY(-2px)}
 
-        .step.active {
-            display: block;
-        }
+  /* ============ SCRAPBOOK ============ */
+  .book{
+    position:relative;z-index:1;
+    max-width:680px;margin:0 auto;
+    padding:80px 24px 120px;
+  }
+  .book h2.title{
+    font-family:'Caveat',cursive;
+    color:var(--green-dark);
+    font-size:clamp(40px,7vw,60px);
+    text-align:center;
+    margin-bottom:50px;
+    transform:rotate(-2deg);
+  }
+  .entry{
+    position:relative;
+    margin:70px auto;
+    opacity:0;transform:translateY(40px);
+    transition:opacity .9s ease, transform .9s ease;
+  }
+  .entry.in{opacity:1;transform:translateY(0)}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+  .polaroid{
+    background:var(--paper);
+    padding:14px 14px 50px;
+    box-shadow:0 14px 30px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.08);
+    width:260px;
+    position:relative;
+    transition:transform .3s ease;
+  }
+  .polaroid:hover{transform:rotate(0) scale(1.03) !important}
+  .polaroid .photo{
+    width:100%;height:230px;
+    background:#dde;
+    background-size:cover;background-position:center;
+    display:flex;align-items:center;justify-content:center;
+    color:#888;font-size:14px;text-align:center;padding:10px;
+  }
+  .polaroid .cap{
+    font-family:'Shadows Into Light',cursive;
+    text-align:center;margin-top:10px;color:#555;font-size:16px;
+  }
+  .tape{
+    position:absolute;width:80px;height:24px;
+    background:var(--tape);
+    box-shadow:0 2px 4px rgba(0,0,0,.1);
+  }
+  .tape.tl{top:-10px;left:-15px;transform:rotate(-35deg)}
+  .tape.tr{top:-10px;right:-15px;transform:rotate(35deg)}
 
-        /* Foto Frame biar nyatu sama desain awal */
-        .photo-container {
-            width: 100%;
-            height: 230px;
-            background-color: #f1f8e9;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            border: 2px dashed var(--main-green);
-        }
+  .note{
+    background:var(--paper);
+    padding:22px 26px;
+    border-radius:6px;
+    box-shadow:0 10px 24px rgba(0,0,0,.12);
+    font-size:20px;
+    line-height:1.55;
+    position:relative;
+  }
+  .note p{margin:0}
 
-        .photo-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+  /* layout pairs */
+  .entry.left{display:flex;gap:30px;align-items:flex-start}
+  .entry.left .polaroid{transform:rotate(-5deg);flex-shrink:0}
+  .entry.left .note{flex:1;transform:rotate(1deg);margin-top:30px}
 
-        h1 {
-            color: var(--main-green);
-            margin-bottom: 20px;
-        }
+  .entry.right{display:flex;gap:30px;align-items:flex-start;flex-direction:row-reverse}
+  .entry.right .polaroid{transform:rotate(4deg);flex-shrink:0}
+  .entry.right .note{flex:1;transform:rotate(-1.5deg);margin-top:30px}
 
-        p {
-            line-height: 1.6;
-            margin-bottom: 20px;
-            font-size: 1.05rem;
-            white-space: pre-line; /* Menjaga baris baru tetap rapi */
-        }
+  .entry.center{text-align:center}
+  .entry.center .note{display:inline-block;max-width:520px;transform:rotate(-1deg);font-size:22px}
 
-        button {
-            background-color: var(--main-green);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 4px 10px rgba(46, 125, 50, 0.2);
-            margin-top: 10px;
-        }
+  @media (max-width:640px){
+    .entry.left,.entry.right{flex-direction:column;align-items:center}
+    .entry.right{flex-direction:column}
+    .polaroid{width:240px}
+  }
 
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(46, 125, 50, 0.3);
-        }
+  /* finale */
+  .finale{
+    text-align:center;margin-top:100px;
+    padding:40px 20px;
+  }
+  .finale h3{
+    font-family:'Caveat',cursive;
+    color:var(--green-dark);
+    font-size:clamp(36px,6vw,52px);
+    line-height:1.1;
+    margin-bottom:20px;
+    transform:rotate(-2deg);
+  }
+  .finale .emoji{font-size:50px;margin:20px 0;letter-spacing:10px}
+  .finale .hint{color:#777;font-size:16px;margin-top:30px;font-style:italic}
 
-        .gift-box {
-            font-size: 70px;
-            margin: 20px 0;
-            cursor: pointer;
-            display: inline-block;
-            animation: bounce 2s infinite;
-        }
+  /* easter egg modal */
+  #egg{
+    position:fixed;inset:0;
+    background:rgba(0,0,0,.6);
+    display:none;align-items:center;justify-content:center;
+    z-index:100;padding:20px;
+  }
+  #egg.show{display:flex;animation:fadeIn .3s}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  #egg .card{
+    background:var(--paper);
+    padding:40px 30px;border-radius:20px;
+    text-align:center;max-width:380px;
+    border:4px solid var(--yellow);
+    transform:scale(.6);
+    animation:pop .4s cubic-bezier(.2,1.5,.5,1) forwards;
+  }
+  @keyframes pop{to{transform:scale(1)}}
+  #egg h4{font-family:'Caveat',cursive;font-size:42px;color:var(--green-dark);margin-bottom:10px}
+  #egg p{font-size:20px;margin-bottom:20px}
+  #egg button{
+    background:var(--green);color:white;border:none;
+    padding:10px 24px;border-radius:25px;
+    font-family:'Patrick Hand',cursive;font-size:18px;cursor:pointer;
+  }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-12px); }
-            60% { transform: translateY(-6px); }
-        }
-    </style>
+  /* confetti */
+  .confetti{
+    position:fixed;width:10px;height:14px;top:-20px;
+    z-index:90;pointer-events:none;
+    animation:confettiFall linear forwards;
+  }
+  @keyframes confettiFall{
+    to{transform:translateY(110vh) rotate(720deg)}
+  }
+</style>
 </head>
 <body>
 
-    <div class="container">
-        
-        <div class="step active" id="step-1">
-            <h1>Halo Tsana! 🟢🟡</h1>
-            <div class="gift-box" id="box-icon" onclick="bukaHadiah()">🎁</div>
-            <p id="gift-text">Klik kadonya dong...</p>
-            <div id="next-btn-1" style="display: none;">
-                <button onclick="changeStep(2)">Lanjut Baca Klik Sini</button>
-            </div>
-        </div>
+<!-- floating leaves background -->
+<div id="leaves"></div>
 
-        <div class="step" id="step-2">
-            <div class="photo-container">
-                <img src="foto1.jpeg" alt="Foto bareng Tsana 1" onerror="this.style.display='none'; this.parentNode.innerText='[ Masukkan file foto1.jpeg di GitHub ]'; this.parentNode.style.display='flex'; this.parentNode.style.alignItems='center'; this.parentNode.style.justifyContent='center'; this.parentNode.style.color='var(--main-green)'; this.parentNode.style.fontWeight='bold';">
-            </div>
-            <p>gw sengaja beliin selimut ini karena gw harap deep sleep lu bisa bener anjir, serem juga ya umur segini tapi deep sleep selalu &lt;30 menit gara gara kencing mulu tiap malem (menurut gw lu mesti cek gula darah rutin)</p>
-            <button onclick="changeStep(3)">Next 👉</button>
-        </div>
+<!-- ============ INTRO / UNBOXING ============ -->
+<section id="intro">
+  <h1>Halo Tsana 🟢🟡</h1>
+  <div class="sub">ada sesuatu buat lu nih...</div>
 
-        <div class="step" id="step-3">
-            <div class="photo-container">
-                <img src="foto2.jpeg" alt="Foto bareng Tsana 2" onerror="this.style.display='none'; this.parentNode.innerText='[ Masukkan file foto2.jpeg di GitHub ]'; this.parentNode.style.display='flex'; this.parentNode.style.alignItems='center'; this.parentNode.style.justifyContent='center'; this.parentNode.style.color='var(--main-green)'; this.parentNode.style.fontWeight='bold';">
-            </div>
-            <p>thank you for being such a supportive friend sekaligus temen yg bisa ngejokes + ngobrolin LITERALLY ANYTHING. at first i thought lu adalah orang pendiem yang susah buat diajak ngejokes. TAPI TERNYATA BERKEBALIKAN BGT ANYING WKWKWK SEGALA JOMOK AJA BISA RELATE???</p>
-            <button onclick="changeStep(4)">Next 👉</button>
-        </div>
+  <div class="box-wrap" id="box" onclick="openBox()">
+    <div class="bow">🎀</div>
+    <div class="box-lid"></div>
+    <div class="box-base"></div>
+    <div class="blanket">🛌</div>
+  </div>
 
-        <div class="step" id="step-4">
-            <div class="photo-container">
-                <img src="foto3.jpeg" alt="Foto bareng Tsana 3" onerror="this.style.display='none'; this.parentNode.innerText='[ Masukkan file foto3.jpeg di GitHub ]'; this.parentNode.style.display='flex'; this.parentNode.style.alignItems='center'; this.parentNode.style.justifyContent='center'; this.parentNode.style.color='var(--main-green)'; this.parentNode.style.fontWeight='bold';">
-            </div>
-            <p>9 months kerja bareng lu ga kerasa bgt sih karena seru bgt kita ada aja obrolannya dan gw tuh bisa dengan nyaman ngomongin apapun itu ke lu. emang lu lah si kalcer pecinta anggrek mekar pontianak favorit kesukaan gweh yang ytta aja.</p>
-            <button onclick="changeStep(5)">Next 👉</button>
-        </div>
+  <div class="tap-hint" id="hint">↑ klik kadonya ↑</div>
 
-        <div class="step" id="step-5">
-            <p>semoga sesudah ini bisa dapet tempat yang lebih baik yaa tsan. i’m really sure, dengan kemampuan lu yang sekarang lu bisa juga dapetin kerjaan dengan compensation & benefit yang ofc lebih sesuai sama yang lu mau. entah lu tbtb keterima kerja di rawalumbu, jadi instruktur pilates di kampung bulak kapal, atau ternyata keterima MT supya bisa mengabdi di ngawi???</p>
-            <button onclick="changeStep(6)">Next 👉</button>
-        </div>
+  <div id="reveal-msg">
+    kalo lu buka hadiahnya, lu akan menemukan barang yang selama ini dapat membantu masalah hidup terbesar lu.<br><br>
+    <b>yap betul, selimut</b> — supaya deep sleep lu bisa lebih tinggi 💤
+  </div>
 
-        <div class="step" id="step-6">
-            <p>we never know loh rekkk yang paling penting inget kata mas rusdi: slow aja kelesss (pls tell me you got the reference😭)</p>
-            <button onclick="changeStep(7)">Next 👉</button>
-        </div>
+  <button id="scroll-btn" onclick="enterBook()">buka surat dari gw →</button>
+</section>
 
-        <div class="step" id="step-7">
-            <p style="font-size: 1.3rem; font-weight: bold; color: var(--main-green);">byeee byeee tsanaaa pls ayooo tetep mainn!!!</p>
-            <div style="font-size: 40px; margin: 20px 0;">🛌💚✨</div>
-            <button onclick="changeStep(1)">Baca Ulang</button>
-        </div>
+<!-- ============ SCRAPBOOK ============ -->
+<main class="book">
+  <h2 class="title">untuk Tsana, dari gw 💚</h2>
 
+  <article class="entry left">
+    <div class="polaroid">
+      <div class="tape tl"></div>
+      <div class="photo" style="background-image:url('foto1.jpeg')">[ foto1.jpeg ]</div>
+      <div class="cap">~ deep sleep era ~</div>
     </div>
+    <div class="note">
+      <p>gw sengaja beliin selimut ini karena gw harap deep sleep lu bisa bener anjir. serem juga ya umur segini tapi deep sleep selalu &lt;30 menit gara-gara kencing mulu tiap malem.<br><br>
+      (menurut gw lu mesti cek gula darah rutin 🙏)</p>
+    </div>
+  </article>
 
-    <script>
-        function bukaHadiah() {
-            const box = document.getElementById('box-icon');
-            const text = document.getElementById('gift-text');
-            const btn = document.getElementById('next-btn-1');
-            
-            box.innerHTML = "🛌✨";
-            box.style.animation = "none";
-            text.innerHTML = "kalo lu buka hadiahnya, lu akan menemukan barang yang selama ini dapat membantu masalah hidup terbesar lu. yap betul, selimut supaya deep sleep lu bisa lebih tinggi.";
-            btn.style.display = "block";
-        }
+  <article class="entry right">
+    <div class="polaroid">
+      <div class="tape tr"></div>
+      <div class="photo" style="background-image:url('foto2.jpeg')">[ foto2.jpeg ]</div>
+      <div class="cap">~ jomok partner ~</div>
+    </div>
+    <div class="note">
+      <p>thank you for being such a supportive friend sekaligus temen yg bisa ngejokes + ngobrolin <i>LITERALLY ANYTHING</i>.<br><br>
+      at first i thought lu adalah orang pendiem yang susah buat diajak ngejokes. <b>TAPI TERNYATA BERKEBALIKAN BGT ANYING WKWKWK</b> segala jomok aja bisa relate???</p>
+    </div>
+  </article>
 
-        function changeStep(stepNum) {
-            const steps = document.querySelectorAll('.step');
-            steps.forEach(s => s.classList.remove('active'));
-            
-            document.getElementById('step-' + stepNum).classList.add('active');
+  <article class="entry left">
+    <div class="polaroid">
+      <div class="tape tl"></div>
+      <div class="tape tr"></div>
+      <div class="photo" style="background-image:url('foto3.jpeg')">[ foto3.jpeg ]</div>
+      <div class="cap">~ 9 bulan ytta ~</div>
+    </div>
+    <div class="note">
+      <p>9 months kerja bareng lu ga kerasa bgt sih, karena seru bgt — kita ada aja obrolannya, dan gw tuh bisa dengan nyaman ngomongin apapun itu ke lu.<br><br>
+      emang lu lah <b>si kalcer pecinta anggrek mekar pontianak favorit kesukaan gweh yang ytta aja</b> 🌸</p>
+    </div>
+  </article>
 
-            if (stepNum === 1) {
-                const box = document.getElementById('box-icon');
-                const text = document.getElementById('gift-text');
-                const btn = document.getElementById('next-btn-1');
-                box.innerHTML = "🎁";
-                box.style.animation = "bounce 2s infinite";
-                text.innerHTML = "Klik kadonya dong...";
-                btn.style.display = "none";
-            }
-        }
-    </script>
+  <article class="entry center">
+    <div class="note">
+      <p>semoga sesudah ini bisa dapet tempat yang lebih baik yaa tsan. i'm really sure, dengan kemampuan lu yang sekarang, lu bisa juga dapetin kerjaan dengan <i>compensation &amp; benefit</i> yang ofc lebih sesuai sama yang lu mau.<br><br>
+      entah lu tbtb keterima kerja di <b>rawalumbu</b>, jadi instruktur pilates di <b>kampung bulak kapal</b>, atau ternyata keterima MT supaya bisa mengabdi di <b>ngawi???</b> 🤣</p>
+    </div>
+  </article>
+
+  <article class="entry center">
+    <div class="note" style="background:#FFF9C4;border:2px dashed var(--green)">
+      <p>we never know loh rekkk 🌿<br>
+      yang paling penting inget kata <b>mas rusdi</b>:<br>
+      <span style="font-family:'Caveat',cursive;font-size:32px;color:var(--green-dark)">"slow aja kelesss"</span><br>
+      <small>(pls tell me you got the reference 😭)</small></p>
+    </div>
+  </article>
+
+  <div class="finale entry center">
+    <h3>byeee byeee tsanaaa<br>pls ayoo tetep mainn!!!</h3>
+    <div class="emoji">🛌 💚 ✨</div>
+    <div class="hint">psst... coba ketik "rusdi" di sini 👀</div>
+  </div>
+</main>
+
+<!-- ============ EASTER EGG ============ -->
+<div id="egg" onclick="closeEgg(event)">
+  <div class="card">
+    <h4>slow aja kelesss 🛌</h4>
+    <p>~ mas rusdi, sang filsuf ~</p>
+    <button onclick="closeEgg(event)">noted bos</button>
+  </div>
+</div>
+
+<script>
+  // ====== floating leaves ======
+  const leafChars = ['🌿','🍃','🌸'];
+  const leafContainer = document.getElementById('leaves');
+  for(let i=0;i<14;i++){
+    const l = document.createElement('div');
+    l.className='leaf';
+    l.textContent = leafChars[i%leafChars.length];
+    l.style.left = Math.random()*100+'vw';
+    l.style.animationDuration = (10+Math.random()*15)+'s';
+    l.style.animationDelay = (Math.random()*10)+'s';
+    l.style.fontSize = (16+Math.random()*18)+'px';
+    leafContainer.appendChild(l);
+  }
+
+  // ====== unboxing ======
+  function openBox(){
+    const box = document.getElementById('box');
+    if(box.classList.contains('open')) return;
+    box.classList.add('open');
+    document.getElementById('hint').style.display='none';
+  }
+
+  function enterBook(){
+    document.getElementById('intro').classList.add('gone');
+    document.body.style.overflow='auto';
+    setTimeout(()=>window.scrollTo({top:0,behavior:'smooth'}),100);
+  }
+
+  // lock scroll until enter
+  document.body.style.overflow='hidden';
+
+  // ====== scroll-in reveal ======
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        if(e.target.classList.contains('finale')) fireConfetti();
+      }
+    });
+  },{threshold:.15});
+  document.querySelectorAll('.entry').forEach(el=>io.observe(el));
+
+  // ====== easter egg: type "rusdi" ======
+  let buf='';
+  window.addEventListener('keydown',(e)=>{
+    buf=(buf+e.key.toLowerCase()).slice(-5);
+    if(buf==='rusdi') showEgg();
+  });
+  // mobile: tap hint 3x
+  let tapCount=0;
+  document.addEventListener('click',(e)=>{
+    if(e.target.classList.contains('hint')){
+      tapCount++;
+      if(tapCount>=3){showEgg();tapCount=0;}
+    }
+  });
+  function showEgg(){document.getElementById('egg').classList.add('show')}
+  function closeEgg(e){
+    if(e.target.id==='egg' || e.target.tagName==='BUTTON')
+      document.getElementById('egg').classList.remove('show');
+  }
+
+  // ====== confetti ======
+  let confettiDone=false;
+  function fireConfetti(){
+    if(confettiDone) return; confettiDone=true;
+    const colors=['#2E7D32','#FDD835','#66BB6A','#FFF59D','#A5D6A7'];
+    for(let i=0;i<80;i++){
+      const c=document.createElement('div');
+      c.className='confetti';
+      c.style.left=Math.random()*100+'vw';
+      c.style.background=colors[i%colors.length];
+      c.style.animationDuration=(2+Math.random()*2.5)+'s';
+      c.style.animationDelay=(Math.random()*1.5)+'s';
+      c.style.transform=`rotate(${Math.random()*360}deg)`;
+      document.body.appendChild(c);
+      setTimeout(()=>c.remove(),5000);
+    }
+  }
+</script>
 </body>
 </html>
