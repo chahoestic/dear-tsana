@@ -3,252 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Tsana</title>
+    <title>For Tsana ✨</title>
     <style>
         :root {
-            --bg-color: #F8F9FA;
-            --card-bg: #FFFFFF;
-            --text-main: #2B2D42;
-            --text-muted: #6C757D;
-            --pastel-green: #E2ECE9;
-            --accent-green: #3B7A57;
-            --pastel-yellow: #FFF3CD;
+            --bg-color: #E8F5E9;
+            --main-green: #2E7D32;
+            --accent-yellow: #FDD835;
+            --text-dark: #222222;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
             background-color: var(--bg-color);
-            color: var(--text-main);
+            color: var(--text-dark);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 24px;
+            padding: 20px;
         }
 
-        .wrapper {
-            max-width: 480px;
+        .container {
+            background: white;
+            max-width: 550px;
             width: 100%;
-            background: var(--card-bg);
             border-radius: 20px;
-            padding: 40px 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-            border: 1px solid #EAEAEA;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 30px;
+            text-align: center;
+            border: 4px solid var(--accent-yellow);
         }
 
         .step {
             display: none;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.4s ease, transform 0.4s ease;
+            animation: fadeIn 0.5s ease forwards;
         }
 
         .step.active {
             display: block;
-            opacity: 1;
-            transform: translateY(0);
         }
 
-        /* Foto Styling */
-        .photo-frame {
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Foto Frame biar nyatu sama desain awal */
+        .photo-container {
             width: 100%;
-            height: 250px;
-            background-color: #EEE;
+            height: 230px;
+            background-color: #f1f8e9;
             border-radius: 12px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             overflow: hidden;
-            border: 1px solid #E5E5E5;
+            border: 2px dashed var(--main-green);
         }
 
-        .photo-frame img {
+        .photo-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
         h1 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            margin-bottom: 24px;
-            color: var(--text-main);
+            color: var(--main-green);
+            margin-bottom: 20px;
         }
 
         p {
+            line-height: 1.6;
+            margin-bottom: 20px;
             font-size: 1.05rem;
-            line-height: 1.7;
-            color: var(--text-main);
-            white-space: pre-line;
-            text-align: left;
-            margin-bottom: 30px;
-        }
-
-        .highlight-box {
-            background-color: var(--pastel-green);
-            padding: 16px;
-            border-radius: 12px;
-            font-size: 1rem;
-            border-left: 4px solid var(--accent-green);
-        }
-
-        .yellow-box {
-            background-color: var(--pastel-yellow);
-            padding: 16px;
-            border-radius: 12px;
-            font-size: 1rem;
-            border: 1px dashed #FFC107;
-        }
-
-        .btn-container {
-            text-align: right;
+            white-space: pre-line; /* Menjaga baris baru tetap rapi */
         }
 
         button {
-            background-color: var(--text-main);
-            color: #FFFFFF;
+            background-color: var(--main-green);
+            color: white;
             border: none;
-            padding: 12px 28px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            border-radius: 8px;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 25px;
             cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease;
+            transition: 0.2s;
+            box-shadow: 0 4px 10px rgba(46, 125, 50, 0.2);
+            margin-top: 10px;
         }
 
         button:hover {
-            background-color: #1F202E;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(46, 125, 50, 0.3);
         }
 
-        button:active {
-            transform: scale(0.98);
-        }
-
-        .gift-trigger {
-            width: 100px;
-            height: 100px;
-            background: var(--pastel-green);
-            border-radius: 50%;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2.5rem;
+        .gift-box {
+            font-size: 70px;
             margin: 20px 0;
             cursor: pointer;
-            transition: transform 0.2s;
+            display: inline-block;
+            animation: bounce 2s infinite;
         }
 
-        .gift-trigger:hover {
-            transform: scale(1.05);
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-12px); }
+            60% { transform: translateY(-6px); }
         }
     </style>
 </head>
 <body>
 
-    <div class="wrapper">
+    <div class="container">
         
         <div class="step active" id="step-1">
-            <h1 style="text-align: center;">Halo Tsana.</h1>
-            <div style="text-align: center;">
-                <div class="gift-trigger" id="gift-box" onclick="bukaHadiah()">🎁</div>
-            </div>
-            <p id="gift-intro" style="text-align: center; color: var(--text-muted);">Klik kado di atas untuk membuka pesan.</p>
-            
-            <div id="next-container-1" style="display: none;" class="btn-container">
-                <button onclick="changeStep(2)">Lanjut</button>
+            <h1>Halo Tsana! 🟢🟡</h1>
+            <div class="gift-box" id="box-icon" onclick="bukaHadiah()">🎁</div>
+            <p id="gift-text">Klik kadonya dong...</p>
+            <div id="next-btn-1" style="display: none;">
+                <button onclick="changeStep(2)">Lanjut Baca Klik Sini</button>
             </div>
         </div>
 
         <div class="step" id="step-2">
-            <div class="photo-frame">
-                <img src="foto1.jpeg" alt="Memory 1" onerror="this.style.display='none'; this.parentNode.innerText='[ Masukkan foto1.jpeg di sini ]'; this.parentNode.style.display='flex'; this.parentNode.style.alignItems='center'; this.parentNode.style.justifyContent='center'; this.parentNode.style.color='#888';">
+            <div class="photo-container">
+                <img src="foto1.jpeg" alt="Foto bareng Tsana 1" onerror="this.style.display='none'; this.parentNode.innerText='[ Masukkan file foto1.jpeg di GitHub ]'; this.parentNode.style.display='flex'; this.parentNode.style.alignItems='center'; this.parentNode.style.justifyContent='center'; this.parentNode.style.color='var(--main-green)'; this.parentNode.style.fontWeight='bold';">
             </div>
-            <p class="highlight-box">gw sengaja beliin selimut ini karena gw harap deep sleep lu bisa bener anjir, serem juga ya umur segini tapi deep sleep selalu &lt;30 menit gara gara kencing mulu tiap malem (menurut gw lu mesti cek gula darah rutin)</p>
-            <div class="btn-container">
-                <button onclick="changeStep(3)">Lanjut</button>
-            </div>
+            <p>gw sengaja beliin selimut ini karena gw harap deep sleep lu bisa bener anjir, serem juga ya umur segini tapi deep sleep selalu &lt;30 menit gara gara kencing mulu tiap malem (menurut gw lu mesti cek gula darah rutin)</p>
+            <button onclick="changeStep(3)">Next 👉</button>
         </div>
 
         <div class="step" id="step-3">
-            <div class="photo-frame">
-                <img src="foto2.jpeg" alt="Memory 2" onerror="this.style.display='none'; this.parentNode.innerText='[ Masukkan foto2.jpeg di sini ]'; this.parentNode.style.display='flex'; this.parentNode.style.alignItems='center'; this.parentNode.style.justifyContent='center'; this.parentNode.style.color='#888';">
+            <div class="photo-container">
+                <img src="foto2.jpeg" alt="Foto bareng Tsana 2" onerror="this.style.display='none'; this.parentNode.innerText='[ Masukkan file foto2.jpeg di GitHub ]'; this.parentNode.style.display='flex'; this.parentNode.style.alignItems='center'; this.parentNode.style.justifyContent='center'; this.parentNode.style.color='var(--main-green)'; this.parentNode.style.fontWeight='bold';">
             </div>
             <p>thank you for being such a supportive friend sekaligus temen yg bisa ngejokes + ngobrolin LITERALLY ANYTHING. at first i thought lu adalah orang pendiem yang susah buat diajak ngejokes. TAPI TERNYATA BERKEBALIKAN BGT ANYING WKWKWK SEGALA JOMOK AJA BISA RELATE???</p>
-            <div class="btn-container">
-                <button onclick="changeStep(4)">Lanjut</button>
-            </div>
+            <button onclick="changeStep(4)">Next 👉</button>
         </div>
 
         <div class="step" id="step-4">
-            <div class="photo-frame">
-                <img src="foto3.jpeg" alt="Memory 3" onerror="this.style.display='none'; this.parentNode.innerText='[ Masukkan foto3.jpeg di sini ]'; this.parentNode.style.display='flex'; this.parentNode.style.alignItems='center'; this.parentNode.style.justifyContent='center'; this.parentNode.style.color='#888';">
+            <div class="photo-container">
+                <img src="foto3.jpeg" alt="Foto bareng Tsana 3" onerror="this.style.display='none'; this.parentNode.innerText='[ Masukkan file foto3.jpeg di GitHub ]'; this.parentNode.style.display='flex'; this.parentNode.style.alignItems='center'; this.parentNode.style.justifyContent='center'; this.parentNode.style.color='var(--main-green)'; this.parentNode.style.fontWeight='bold';">
             </div>
             <p>9 months kerja bareng lu ga kerasa bgt sih karena seru bgt kita ada aja obrolannya dan gw tuh bisa dengan nyaman ngomongin apapun itu ke lu. emang lu lah si kalcer pecinta anggrek mekar pontianak favorit kesukaan gweh yang ytta aja.</p>
-            <div class="btn-container">
-                <button onclick="changeStep(5)">Lanjut</button>
-            </div>
+            <button onclick="changeStep(5)">Next 👉</button>
         </div>
 
         <div class="step" id="step-5">
             <p>semoga sesudah ini bisa dapet tempat yang lebih baik yaa tsan. i’m really sure, dengan kemampuan lu yang sekarang lu bisa juga dapetin kerjaan dengan compensation & benefit yang ofc lebih sesuai sama yang lu mau. entah lu tbtb keterima kerja di rawalumbu, jadi instruktur pilates di kampung bulak kapal, atau ternyata keterima MT supya bisa mengabdi di ngawi???</p>
-            <div class="btn-container">
-                <button onclick="changeStep(6)">Lanjut</button>
-            </div>
+            <button onclick="changeStep(6)">Next 👉</button>
         </div>
 
         <div class="step" id="step-6">
-            <p class="yellow-box">we never know loh rekkk yang paling penting inget kata mas rusdi: slow aja kelesss (pls tell me you got the reference😭)</p>
-            <div class="btn-container">
-                <button onclick="changeStep(7)">Lanjut</button>
-            </div>
+            <p>we never know loh rekkk yang paling penting inget kata mas rusdi: slow aja kelesss (pls tell me you got the reference😭)</p>
+            <button onclick="changeStep(7)">Next 👉</button>
         </div>
 
         <div class="step" id="step-7">
-            <h1 style="font-size: 1.4rem; line-height: 1.6; font-weight: 600; margin-bottom: 30px;">byeee byeee tsanaaa pls ayooo tetep mainn!!!</h1>
-            <div class="btn-container" style="text-align: center;">
-                <button onclick="changeStep(1)" style="background-color: var(--text-muted);">Ulangi Dari Awal</button>
-            </div>
+            <p style="font-size: 1.3rem; font-weight: bold; color: var(--main-green);">byeee byeee tsanaaa pls ayooo tetep mainn!!!</p>
+            <div style="font-size: 40px; margin: 20px 0;">🛌💚✨</div>
+            <button onclick="changeStep(1)">Baca Ulang</button>
         </div>
 
     </div>
 
     <script>
         function bukaHadiah() {
-            const giftBox = document.getElementById('gift-box');
-            const introText = document.getElementById('gift-intro');
-            const btnContainer = document.getElementById('next-container-1');
-
-            giftBox.innerHTML = "🛌";
-            introText.innerHTML = "kalo lu buka hadiahnya, lu akan menemukan barang yang selama ini dapat membantu masalah hidup terbesar lu. yap betul, selimut supaya deep sleep lu bisa lebih tinggi.";
-            introText.style.textAlign = "left";
-            introText.style.color = "var(--text-main)";
+            const box = document.getElementById('box-icon');
+            const text = document.getElementById('gift-text');
+            const btn = document.getElementById('next-btn-1');
             
-            btnContainer.style.display = "block";
+            box.innerHTML = "🛌✨";
+            box.style.animation = "none";
+            text.innerHTML = "kalo lu buka hadiahnya, lu akan menemukan barang yang selama ini dapat membantu masalah hidup terbesar lu. yap betul, selimut supaya deep sleep lu bisa lebih tinggi.";
+            btn.style.display = "block";
         }
 
         function changeStep(stepNum) {
             const steps = document.querySelectorAll('.step');
             steps.forEach(s => s.classList.remove('active'));
-
-            setTimeout(() => {
-                document.getElementById('step-' + stepNum).classList.add('active');
-            }, 50);
+            
+            document.getElementById('step-' + stepNum).classList.add('active');
 
             if (stepNum === 1) {
-                const giftBox = document.getElementById('gift-box');
-                const introText = document.getElementById('gift-intro');
-                const btnContainer = document.getElementById('next-container-1');
-                
-                giftBox.innerHTML = "🎁";
-                introText.innerHTML = "Klik kado di atas untuk membuka pesan.";
-                introText.style.textAlign = "center";
-                introText.style.color = "var(--text-muted)";
-                btnContainer.style.display = "none";
+                const box = document.getElementById('box-icon');
+                const text = document.getElementById('gift-text');
+                const btn = document.getElementById('next-btn-1');
+                box.innerHTML = "🎁";
+                box.style.animation = "bounce 2s infinite";
+                text.innerHTML = "Klik kadonya dong...";
+                btn.style.display = "none";
             }
         }
     </script>
