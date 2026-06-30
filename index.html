@@ -9,13 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Patrick+Hand&family=Shadows+Into+Light&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#EAF5E9;
-    --paper:#FFFDF7;
-    --green:#2E7D32;
-    --green-dark:#1B5E20;
-    --yellow:#FDD835;
-    --ink:#2b2b2b;
-    --tape:rgba(253,216,53,0.55);
+    --bg:#EAF5E9;--paper:#FFFDF7;--green:#2E7D32;--green-dark:#1B5E20;
+    --yellow:#FDD835;--ink:#2b2b2b;--tape:rgba(253,216,53,0.55);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{overflow-x:hidden}
@@ -25,218 +20,105 @@
       radial-gradient(circle at 20% 10%, #d6ebd3 0, transparent 40%),
       radial-gradient(circle at 80% 60%, #f4f0c8 0, transparent 45%),
       var(--bg);
-    color:var(--ink);
-    min-height:100vh;
-    line-height:1.55;
+    color:var(--ink);min-height:100vh;line-height:1.55;
   }
-  .leaf{
-    position:fixed;top:-40px;font-size:22px;opacity:.55;
-    pointer-events:none;animation:fall linear infinite;z-index:0;
-  }
-  @keyframes fall{
-    0%{transform:translateY(-10vh) rotate(0)}
-    100%{transform:translateY(110vh) rotate(540deg)}
-  }
+  .leaf{position:fixed;top:-40px;font-size:22px;opacity:.55;pointer-events:none;animation:fall linear infinite;z-index:0}
+  @keyframes fall{0%{transform:translateY(-10vh) rotate(0)}100%{transform:translateY(110vh) rotate(540deg)}}
 
   /* INTRO */
-  #intro{
-    position:fixed;inset:0;
-    background:linear-gradient(160deg,#EAF5E9 0%, #d4ecd2 100%);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    z-index:50;transition:opacity .8s ease, visibility .8s ease;padding:20px;
-  }
+  #intro{position:fixed;inset:0;background:linear-gradient(160deg,#EAF5E9 0%, #d4ecd2 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:50;transition:opacity .8s ease, visibility .8s ease;padding:20px}
   #intro.gone{opacity:0;visibility:hidden}
   #intro h1{font-family:'Caveat',cursive;color:var(--green-dark);font-size:clamp(32px,6vw,48px);margin-bottom:8px}
   #intro .sub{font-size:18px;color:#555;margin-bottom:30px}
-
   .box-wrap{position:relative;width:220px;height:200px;cursor:pointer;perspective:800px}
-  .box-base{
-    position:absolute;bottom:0;left:0;right:0;height:140px;
-    background:linear-gradient(180deg,#388E3C,#2E7D32);border-radius:8px;
-    box-shadow:0 18px 35px rgba(0,0,0,.18), inset 0 -8px 0 rgba(0,0,0,.15);
-  }
-  .box-base::before{
-    content:"";position:absolute;top:0;bottom:0;left:50%;width:26px;
-    transform:translateX(-50%);background:var(--yellow);
-  }
-  .box-lid{
-    position:absolute;top:50px;left:-8px;right:-8px;height:50px;
-    background:linear-gradient(180deg,#43A047,#2E7D32);border-radius:8px;
-    box-shadow:0 6px 12px rgba(0,0,0,.2);transform-origin:center bottom;
-    transition:transform 1s cubic-bezier(.5,-0.3,.3,1.4), top 1s ease, opacity .6s ease .8s;z-index:3;
-  }
-  .box-lid::before{
-    content:"";position:absolute;top:0;bottom:0;left:50%;width:26px;
-    transform:translateX(-50%);background:var(--yellow);
-  }
-  .bow{
-    position:absolute;top:38px;left:50%;transform:translateX(-50%);
-    font-size:40px;z-index:4;transition:transform .8s ease, opacity .6s ease;
-  }
-  .blanket{
-    position:absolute;top:60px;left:50%;
-    transform:translateX(-50%) scale(0);font-size:80px;opacity:0;
-    transition:transform 1s cubic-bezier(.2,1.3,.5,1) .5s, opacity .8s ease .5s, top 1s ease .5s;z-index:2;
-  }
+  .box-base{position:absolute;bottom:0;left:0;right:0;height:140px;background:linear-gradient(180deg,#388E3C,#2E7D32);border-radius:8px;box-shadow:0 18px 35px rgba(0,0,0,.18), inset 0 -8px 0 rgba(0,0,0,.15)}
+  .box-base::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:26px;transform:translateX(-50%);background:var(--yellow)}
+  .box-lid{position:absolute;top:50px;left:-8px;right:-8px;height:50px;background:linear-gradient(180deg,#43A047,#2E7D32);border-radius:8px;box-shadow:0 6px 12px rgba(0,0,0,.2);transform-origin:center bottom;transition:transform 1s cubic-bezier(.5,-0.3,.3,1.4), top 1s ease, opacity .6s ease .8s;z-index:3}
+  .box-lid::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:26px;transform:translateX(-50%);background:var(--yellow)}
+  .bow{position:absolute;top:38px;left:50%;transform:translateX(-50%);font-size:40px;z-index:4;transition:transform .8s ease, opacity .6s ease}
+  .blanket{position:absolute;top:60px;left:50%;transform:translateX(-50%) scale(0);font-size:80px;opacity:0;transition:transform 1s cubic-bezier(.2,1.3,.5,1) .5s, opacity .8s ease .5s, top 1s ease .5s;z-index:2}
   .box-wrap.open .box-lid{transform:translateY(-100px) rotate(-25deg);opacity:0}
   .box-wrap.open .bow{transform:translate(-50%,-150px) rotate(45deg);opacity:0}
   .box-wrap.open .blanket{transform:translateX(-50%) scale(1);opacity:1;top:-30px}
-
-  .tap-hint{
-    margin-top:30px;color:var(--green-dark);
-    font-family:'Caveat',cursive;font-size:24px;
-    animation:pulse 1.6s ease-in-out infinite;
-  }
+  .tap-hint{margin-top:30px;color:var(--green-dark);font-family:'Caveat',cursive;font-size:24px;animation:pulse 1.6s ease-in-out infinite}
   @keyframes pulse{50%{opacity:.4}}
-
-  #reveal-msg{
-    margin-top:24px;background:var(--paper);padding:18px 24px;
-    border-radius:14px;max-width:420px;font-size:18px;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);border:2px dashed var(--green);
-    opacity:0;transform:translateY(20px);
-    transition:opacity .8s ease 1.2s, transform .8s ease 1.2s;text-align:center;
-  }
+  #reveal-msg{margin-top:24px;background:var(--paper);padding:18px 24px;border-radius:14px;max-width:420px;font-size:18px;box-shadow:0 8px 20px rgba(0,0,0,.08);border:2px dashed var(--green);opacity:0;transform:translateY(20px);transition:opacity .8s ease 1.2s, transform .8s ease 1.2s;text-align:center}
   .box-wrap.open ~ #reveal-msg{opacity:1;transform:translateY(0)}
-  #scroll-btn{
-    margin-top:18px;background:var(--green);color:white;border:none;
-    padding:12px 28px;border-radius:30px;font-size:18px;
-    font-family:'Patrick Hand',cursive;cursor:pointer;
-    box-shadow:0 6px 16px rgba(46,125,50,.35);
-    opacity:0;pointer-events:none;
-    transition:opacity .6s ease 2s, transform .2s;
-  }
+  #scroll-btn{margin-top:18px;background:var(--green);color:white;border:none;padding:12px 28px;border-radius:30px;font-size:18px;font-family:'Patrick Hand',cursive;cursor:pointer;box-shadow:0 6px 16px rgba(46,125,50,.35);opacity:0;pointer-events:none;transition:opacity .6s ease 2s, transform .2s}
   .box-wrap.open ~ #scroll-btn{opacity:1;pointer-events:auto}
   #scroll-btn:hover{transform:translateY(-2px)}
 
   /* SCRAPBOOK */
   .book{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:80px 24px 120px}
-  .book h2.title{
-    font-family:'Caveat',cursive;color:var(--green-dark);
-    font-size:clamp(40px,7vw,60px);text-align:center;margin-bottom:50px;
-    transform:rotate(-2deg);
-  }
-  .entry{
-    position:relative;margin:70px auto;
-    opacity:0;transform:translateY(40px);
-    transition:opacity .9s ease, transform .9s ease;
-  }
+  .book h2.title{font-family:'Caveat',cursive;color:var(--green-dark);font-size:clamp(40px,7vw,60px);text-align:center;margin-bottom:50px;transform:rotate(-2deg)}
+  .entry{position:relative;margin:70px auto;opacity:0;transform:translateY(40px);transition:opacity .9s ease, transform .9s ease}
   .entry.in{opacity:1;transform:translateY(0)}
-
-  .polaroid{
-    background:var(--paper);padding:14px 14px 50px;
-    box-shadow:0 14px 30px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.08);
-    width:260px;position:relative;transition:transform .3s ease;
-  }
+  .polaroid{background:var(--paper);padding:14px 14px 50px;box-shadow:0 14px 30px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.08);width:260px;position:relative;transition:transform .3s ease}
   .polaroid:hover{transform:rotate(0) scale(1.03) !important}
-  .polaroid .photo{
-    width:100%;height:230px;background:#dde;
-    background-size:cover;background-position:center;
-    display:flex;align-items:center;justify-content:center;
-    color:#888;font-size:14px;text-align:center;padding:10px;
-  }
-  .polaroid .cap{
-    font-family:'Shadows Into Light',cursive;
-    text-align:center;margin-top:10px;color:#555;font-size:16px;
-  }
-  .tape{
-    position:absolute;width:80px;height:24px;
-    background:var(--tape);box-shadow:0 2px 4px rgba(0,0,0,.1);
-  }
+  .polaroid .photo{width:100%;height:230px;background:#dde;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:#888;font-size:14px;text-align:center;padding:10px}
+  .polaroid .cap{font-family:'Shadows Into Light',cursive;text-align:center;margin-top:10px;color:#555;font-size:16px}
+  .tape{position:absolute;width:80px;height:24px;background:var(--tape);box-shadow:0 2px 4px rgba(0,0,0,.1)}
   .tape.tl{top:-10px;left:-15px;transform:rotate(-35deg)}
   .tape.tr{top:-10px;right:-15px;transform:rotate(35deg)}
-
-  .note{
-    background:var(--paper);padding:22px 26px;border-radius:6px;
-    box-shadow:0 10px 24px rgba(0,0,0,.12);
-    font-size:20px;line-height:1.55;position:relative;
-  }
+  .note{background:var(--paper);padding:22px 26px;border-radius:6px;box-shadow:0 10px 24px rgba(0,0,0,.12);font-size:20px;line-height:1.55;position:relative}
   .note p{margin:0}
-
   .entry.left{display:flex;gap:30px;align-items:flex-start}
   .entry.left .polaroid{transform:rotate(-5deg);flex-shrink:0}
   .entry.left .note{flex:1;transform:rotate(1deg);margin-top:30px}
-
   .entry.right{display:flex;gap:30px;align-items:flex-start;flex-direction:row-reverse}
   .entry.right .polaroid{transform:rotate(4deg);flex-shrink:0}
   .entry.right .note{flex:1;transform:rotate(-1.5deg);margin-top:30px}
-
   .entry.center{text-align:center}
-  .entry.center .note{display:inline-block;max-width:520px;transform:rotate(-1deg);font-size:22px}
-
+  .entry.center .note{display:inline-block;max-width:520px;transform:rotate(-1deg);font-size:22px;text-align:left}
   @media (max-width:640px){
     .entry.left,.entry.right{flex-direction:column;align-items:center}
     .entry.right{flex-direction:column}
     .polaroid{width:240px}
   }
 
+  /* plot twist effect */
+  .twist-wrap{display:block;margin-top:14px;position:relative;min-height:80px}
+  .wah{display:inline-block;background:#FF5252;color:#fff;font-family:'Caveat',cursive;font-weight:700;font-size:34px;line-height:1;padding:6px 16px;border-radius:50%;transform:scale(0) rotate(-25deg);box-shadow:0 6px 14px rgba(255,82,82,.45);margin-right:8px;vertical-align:middle}
+  .berkebalikan{display:inline-block;background:linear-gradient(90deg,#FDD835,#FFEB3B,#FDD835);padding:4px 14px;border-radius:8px;font-weight:bold;color:var(--green-dark);transform:scale(0) rotate(-6deg);box-shadow:0 6px 16px rgba(253,216,53,.5);vertical-align:middle}
+  .entry.in .wah{animation:wahPop .6s cubic-bezier(.2,1.8,.4,1) .3s forwards, wahWiggle .5s ease .9s 2}
+  .entry.in .berkebalikan{animation:berkPop .7s cubic-bezier(.2,1.6,.4,1) .8s forwards, berkShake .4s ease 1.5s 3}
+  @keyframes wahPop{0%{transform:scale(0) rotate(-25deg)}70%{transform:scale(1.3) rotate(8deg)}100%{transform:scale(1) rotate(-8deg)}}
+  @keyframes wahWiggle{0%,100%{transform:scale(1) rotate(-8deg)}50%{transform:scale(1.15) rotate(10deg)}}
+  @keyframes berkPop{0%{transform:scale(0) rotate(-6deg)}60%{transform:scale(1.15) rotate(3deg)}100%{transform:scale(1) rotate(-2deg)}}
+  @keyframes berkShake{0%,100%{transform:scale(1) rotate(-2deg) translateX(0)}25%{transform:scale(1.05) rotate(-2deg) translateX(-4px)}75%{transform:scale(1.05) rotate(-2deg) translateX(4px)}}
+
+  /* kalcer rainbow */
+  .kalcer{background:linear-gradient(90deg,#2E7D32 0%,#FDD835 25%,#E91E63 50%,#9C27B0 75%,#2E7D32 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;font-weight:bold;animation:shimmer 4s linear infinite;display:inline}
+  @keyframes shimmer{to{background-position:200% center}}
+  .sparkle{display:inline-block;animation:sparkleSpin 2.5s linear infinite}
+  @keyframes sparkleSpin{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.3) rotate(180deg)}}
+
   .finale{text-align:center;margin-top:100px;padding:40px 20px}
-  .finale h3{
-    font-family:'Caveat',cursive;color:var(--green-dark);
-    font-size:clamp(36px,6vw,52px);line-height:1.1;
-    margin-bottom:20px;transform:rotate(-2deg);
-  }
+  .finale h3{font-family:'Caveat',cursive;color:var(--green-dark);font-size:clamp(36px,6vw,52px);line-height:1.1;margin-bottom:20px;transform:rotate(-2deg)}
   .finale .emoji{font-size:50px;margin:20px 0;letter-spacing:10px}
 
   /* slot machine */
-  .slot-machine{
-    background:linear-gradient(180deg,#2E7D32,#1B5E20);
-    padding:24px;border-radius:18px;
-    box-shadow:0 14px 30px rgba(0,0,0,.25), inset 0 0 0 4px var(--yellow);
-    max-width:420px;margin:0 auto;transform:rotate(-1deg);
-  }
-  .slot-frame{
-    background:#fff;border-radius:10px;height:80px;
-    overflow:hidden;position:relative;
-    box-shadow:inset 0 4px 10px rgba(0,0,0,.2);
-  }
-  .slot-frame::before,.slot-frame::after{
-    content:"";position:absolute;left:0;right:0;height:20px;z-index:2;pointer-events:none;
-  }
+  .slot-machine{background:linear-gradient(180deg,#2E7D32,#1B5E20);padding:24px;border-radius:18px;box-shadow:0 14px 30px rgba(0,0,0,.25), inset 0 0 0 4px var(--yellow);max-width:420px;margin:0 auto;transform:rotate(-1deg)}
+  .slot-frame{background:#fff;border-radius:10px;height:80px;overflow:hidden;position:relative;box-shadow:inset 0 4px 10px rgba(0,0,0,.2)}
+  .slot-frame::before,.slot-frame::after{content:"";position:absolute;left:0;right:0;height:20px;z-index:2;pointer-events:none}
   .slot-frame::before{top:0;background:linear-gradient(180deg,rgba(255,255,255,.95),transparent)}
   .slot-frame::after{bottom:0;background:linear-gradient(0deg,rgba(255,255,255,.95),transparent)}
   .slot-reel{display:flex;flex-direction:column;transition:transform 3s cubic-bezier(.15,.85,.25,1)}
-  .slot-item{
-    height:80px;display:flex;align-items:center;justify-content:center;
-    font-size:18px;text-align:center;padding:0 12px;color:var(--ink);
-  }
-  .spin-btn{
-    margin-top:16px;background:var(--yellow);color:var(--green-dark);
-    border:none;padding:12px 28px;border-radius:30px;
-    font-family:'Patrick Hand',cursive;font-size:20px;font-weight:bold;cursor:pointer;
-    box-shadow:0 4px 0 #c9a900, 0 8px 16px rgba(0,0,0,.2);
-    transition:transform .1s, box-shadow .1s;
-  }
+  .slot-item{height:80px;display:flex;align-items:center;justify-content:center;font-size:18px;text-align:center;padding:0 12px;color:var(--ink)}
+  .spin-btn{margin-top:16px;background:var(--yellow);color:var(--green-dark);border:none;padding:12px 28px;border-radius:30px;font-family:'Patrick Hand',cursive;font-size:20px;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #c9a900, 0 8px 16px rgba(0,0,0,.2);transition:transform .1s, box-shadow .1s}
   .spin-btn:hover{transform:translateY(-1px)}
   .spin-btn:active{transform:translateY(2px);box-shadow:0 2px 0 #c9a900}
   .spin-btn:disabled{opacity:.6;cursor:not-allowed}
-  .slot-caption{
-    margin-top:14px;color:#FFF59D;
-    font-family:'Caveat',cursive;font-size:22px;min-height:28px;
-  }
+  .slot-caption{margin-top:14px;color:#FFF59D;font-family:'Caveat',cursive;font-size:22px;min-height:28px}
 
   /* rusdi card */
-  .rusdi-card{
-    background:var(--paper);border-radius:14px;padding:20px;
-    max-width:380px;margin:0 auto;
-    box-shadow:0 14px 30px rgba(0,0,0,.15);
-    border:3px solid var(--yellow);transform:rotate(1deg);
-  }
-  .rusdi-photo{
-    width:100%;height:240px;background:#dde;
-    background-size:cover;background-position:center;border-radius:8px;
-    display:flex;align-items:center;justify-content:center;color:#888;font-size:14px;
-  }
-  .rusdi-quote{
-    font-family:'Caveat',cursive;font-size:36px;color:var(--green-dark);
-    margin-top:16px;line-height:1.1;
-  }
+  .rusdi-card{background:var(--paper);border-radius:14px;padding:20px;max-width:380px;margin:0 auto;box-shadow:0 14px 30px rgba(0,0,0,.15);border:3px solid var(--yellow);transform:rotate(1deg);text-align:center}
+  .rusdi-photo{width:100%;height:240px;background:#dde;background-size:cover;background-position:center;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#888;font-size:14px}
+  .rusdi-quote{font-family:'Caveat',cursive;font-size:36px;color:var(--green-dark);margin-top:16px;line-height:1.1}
   .rusdi-sub{font-size:16px;color:#777;margin-top:4px}
 
   /* confetti */
-  .confetti{
-    position:fixed;width:10px;height:14px;top:-20px;
-    z-index:90;pointer-events:none;animation:confettiFall linear forwards;
-  }
+  .confetti{position:fixed;width:10px;height:14px;top:-20px;z-index:90;pointer-events:none;animation:confettiFall linear forwards}
   @keyframes confettiFall{to{transform:translateY(110vh) rotate(720deg)}}
 </style>
 </head>
@@ -244,7 +126,6 @@
 
 <div id="leaves"></div>
 
-<!-- INTRO -->
 <section id="intro">
   <h1>Halo Tsana 🟢🟡</h1>
   <div class="sub">ada sesuatu buat lu nih...</div>
@@ -262,9 +143,15 @@
   <button id="scroll-btn" onclick="enterBook()">buka surat dari gw →</button>
 </section>
 
-<!-- SCRAPBOOK -->
 <main class="book">
   <h2 class="title">untuk Tsana, dari gw 💚</h2>
+
+  <article class="entry center">
+    <div class="note">
+      <p>gw sengaja beliin selimut ini karena gw harap deep sleep lu bisa bener anjir. serem juga ya umur segini tapi deep sleep selalu &lt;30 menit gara-gara kencing mulu tiap malem.<br><br>
+      (menurut gw lu mesti cek gula darah rutin 🙏)</p>
+    </div>
+  </article>
 
   <article class="entry left">
     <div class="polaroid">
@@ -273,8 +160,13 @@
       <div class="cap">~ tsana &lt;3 ~</div>
     </div>
     <div class="note">
-      <p>gw sengaja beliin selimut ini karena gw harap deep sleep lu bisa bener anjir. serem juga ya umur segini tapi deep sleep selalu &lt;30 menit gara-gara kencing mulu tiap malem.<br><br>
-      (menurut gw lu mesti cek gula darah rutin 🙏)</p>
+      <p>thank you for being such a supportive friend sekaligus temen yg bisa ngejokes + ngobrolin <i>LITERALLY ANYTHING</i>.</p>
+      <p style="margin-top:14px">at first i thought lu adalah orang pendiem yang susah buat diajak ngejokes.</p>
+      <div class="twist-wrap">
+        <span class="wah">WAH!</span>
+        <span class="berkebalikan">TAPI TERNYATA BERKEBALIKAN BGT ANYING WKWKWK</span>
+      </div>
+      <p style="margin-top:10px">segala jomok aja bisa relate???</p>
     </div>
   </article>
 
@@ -282,11 +174,11 @@
     <div class="polaroid">
       <div class="tape tr"></div>
       <div class="photo" style="background-image:url('foto2.jpeg')">[ foto2.jpeg ]</div>
-      <div class="cap">~ favorit kesukaan gweh ~</div>
+      <div class="cap">~ 9 bulan ga kerasa ~</div>
     </div>
     <div class="note">
-      <p>thank you for being such a supportive friend sekaligus temen yg bisa ngejokes + ngobrolin <i>LITERALLY ANYTHING</i>.<br><br>
-      at first i thought lu adalah orang pendiem yang susah buat diajak ngejokes. <b>TAPI TERNYATA BERKEBALIKAN BGT ANYING WKWKWK</b> segala jomok aja bisa relate???</p>
+      <p>9 months kerja bareng lu ga kerasa bgt sih, karena seru bgt — kita ada aja obrolannya, dan gw tuh bisa dengan nyaman ngomongin apapun itu ke lu.<br><br>
+      emang lu lah <span class="kalcer">si kalcer pecinta anggrek mekar pontianak favorit kesukaan gweh yang ytta aja</span> <span class="sparkle">🌸</span></p>
     </div>
   </article>
 
@@ -295,15 +187,8 @@
       <div class="tape tl"></div>
       <div class="tape tr"></div>
       <div class="photo" style="background-image:url('foto3.jpeg')">[ foto3.jpeg ]</div>
-      <div class="cap">~ 9 bulan ga kerasa ~</div>
+      <div class="cap">~ doain ya tsan ~</div>
     </div>
-    <div class="note">
-      <p>9 months kerja bareng lu ga kerasa bgt sih, karena seru bgt — kita ada aja obrolannya, dan gw tuh bisa dengan nyaman ngomongin apapun itu ke lu.<br><br>
-      emang lu lah <b>si kalcer pecinta anggrek mekar pontianak favorit kesukaan gweh yang ytta aja</b> 🌸</p>
-    </div>
-  </article>
-
-  <article class="entry center">
     <div class="note">
       <p>semoga sesudah ini bisa dapet tempat yang lebih baik yaa tsan. i'm really sure, dengan kemampuan lu yang sekarang, lu bisa juga dapetin kerjaan dengan <i>compensation &amp; benefit</i> yang ofc lebih sesuai sama yang lu mau.<br><br>
       siapa tau lu tbtb keterima jadi...</p>
@@ -327,7 +212,7 @@
 
   <article class="entry center">
     <div class="rusdi-card">
-      <div class="rusdi-photo" style="background-image:url('foto-rusdi.jpg')">[ foto-rusdi.jpg ]</div>
+      <div class="rusdi-photo" style="background-image:url('foto-rusdi.jpeg')">[ foto-rusdi.jpeg ]</div>
       <div class="rusdi-quote">"slow aja kelesss"</div>
       <div class="rusdi-sub">— mas rusdi, sang filsuf 🧘</div>
       <p style="margin-top:18px;font-size:18px">yang paling penting inget kata beliau ya tsan 🙏<br><small>(pls tell me you got the reference 😭)</small></p>
